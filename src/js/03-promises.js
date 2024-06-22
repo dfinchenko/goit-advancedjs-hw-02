@@ -16,13 +16,13 @@ function createPromise(position, delay) {
     const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
-        resolve({ position, delay })
+        resolve({ position, delay });
       } else {
-        reject({ position, delay })
+        reject({ position, delay });
       }
     }, delay);
   });
-};
+}
 
 function onFormSubmit(event) {
   event.preventDefault();
@@ -48,4 +48,4 @@ function onFormSubmit(event) {
     newDelay += step;
   }
   refs.form.reset();
-};
+}

@@ -14,7 +14,7 @@ const refs = {
 
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', onStartEvent);
-  
+
 let selectedNewDates = null;
 
 const options = {
@@ -23,7 +23,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
+    console.log(selectedDates[0]);
 
     if (selectedDates[0] <= new Date()) {
       iziToast.show({
@@ -32,33 +32,33 @@ const options = {
         message: 'Please choose a date in the future',
       });
     } else {
-        selectedNewDates = selectedDates[0].getTime();
+      selectedNewDates = selectedDates[0].getTime();
       refs.startBtn.disabled = false;
       refs.input.disabled = false;
-      }
+    }
   },
 };
 
 flatpickr('input#datetime-picker', options);
 
 function onStartEvent() {
-    const timer = setInterval(() => {
-        const currentDate = new Date().getTime();
-        const eventDate = selectedNewDates - currentDate;
-        startPromoTimer(convertMs(eventDate));
-      refs.startBtn.disabled = true;
-      refs.input.disabled = true;
-        
-        if (selectedNewDates - currentDate < 1000) {
-          clearInterval(timer);
-           iziToast.show({
-             position: 'center',
-             message: 'Event in the End',
-           });
-          refs.startBtn.disabled = false;
-          refs.input.disabled = false;
-        }
-    }, 1000)
+  const timer = setInterval(() => {
+    const currentDate = new Date().getTime();
+    const eventDate = selectedNewDates - currentDate;
+    startPromoTimer(convertMs(eventDate));
+    refs.startBtn.disabled = true;
+    refs.input.disabled = true;
+
+    if (selectedNewDates - currentDate < 1000) {
+      clearInterval(timer);
+      iziToast.show({
+        position: 'center',
+        message: 'Event in the End',
+      });
+      refs.startBtn.disabled = false;
+      refs.input.disabled = false;
+    }
+  }, 1000);
 }
 
 function convertMs(ms) {
@@ -75,20 +75,20 @@ function convertMs(ms) {
   // Remaining minutes
   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
   // Remaining seconds
-  const seconds = addLeadingZero(Math.floor(
-    (((ms % day) % hour) % minute) / second
-  ));
+  const seconds = addLeadingZero(
+    Math.floor((((ms % day) % hour) % minute) / second)
+  );
 
   return { days, hours, minutes, seconds };
 }
 
 function startPromoTimer({ days, hours, minutes, seconds }) {
-    refs.days.textContent = days;
-    refs.hours.textContent = hours;
-    refs.minutes.textContent = minutes;
-    refs.seconds.textContent = seconds;
+  refs.days.textContent = days;
+  refs.hours.textContent = hours;
+  refs.minutes.textContent = minutes;
+  refs.seconds.textContent = seconds;
 }
 
 function addLeadingZero(value) {
-    return String(value).padStart(2, '0');
-};
+  return String(value).padStart(2, '0');
+}
