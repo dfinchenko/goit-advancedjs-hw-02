@@ -2,7 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const refs = {
-  form: document.querySelector('.js-form'),
+  form: document.querySelector('.form'),
   submitBtn: document.querySelector('button'),
   amount: document.querySelector('[name="amount"]'),
   step: document.querySelector('[name="step"]'),
